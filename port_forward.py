@@ -28,8 +28,6 @@ def forward_handle(source, dest):
         while True:
             try:
                 data = source.recv(60000)
-                #log('%s->%s: %r', source_address, dest_address, data)
-                #log('%s->%s: %s', source_address, dest_address, str(len(data)))
                 if not data:
                     break
                 dest.sendall(data)
@@ -48,7 +46,7 @@ def forward_handle(source, dest):
 
 
 if __name__ == '__main__':
-    #pool = Pool(10000) 
+    pool = Pool(10000) 
     server = StreamServer(('0.0.0.0', 8800), forward ,spawn=pool)
     print('Starting forward server on port 8800')
     server.serve_forever()
